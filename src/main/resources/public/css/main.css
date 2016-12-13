@@ -1,0 +1,19 @@
+body {
+  background: #875105 url('../img/background.jpg') no-repeat;
+  background-size: cover;
+  padding: 0;
+  margin: 0;
+}
+
+.ui.main.container {
+  padding-top: 80px;
+}
+.header.item {
+  font-family: 'Exo', sans-serif;
+  color: #f33;
+}
+
+.statement {
+  background-color: rgba(255,255,255,.5);
+  padding: 10pt;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <link href="http://fonts.googleapis.com/css?family=Exo:900" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.css" rel="stylesheet"/>
+    <link href="/css/main.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="pusher">
+    <div class="ui fixed menu">
+        <div class="ui container">
+            <a href="#" class="header item">Saving Engineers</a>
+        </div>
+    </div>
+    <div class="full height image">
+        <div class="ui main container">
+            <div class="ui information container">
+                <h1 class="ui center aligned header" th:text="${campaign.title}">Sign title</h1>
+                <div class="ui center aligned header">
+                    <a th:text="${campaign.createdBy}">Created by</a>
+                </div>
+                <div class="ui positive message" th:if="${message != null}">
+                    <div class="header" th:text="${message}">Thank you</div>
+                </div>
+                <div class="ui grid">
+                    <div class="ten wide column">
+                        <div class="statement" th:utext="${campaign.statement}">
+
+                        </div>
+                    </div>
+                    <div class="six wide column">
+                        <h2>今すぐ賛同</h2>
+                        <p><span th:text="${signatureCount}">345</span>人の賛同</p>
+                        <div class="ui red progress">
+                            <div class="bar" th:style="${'width:' + (signatureCount * 100 / campaign.goal) + '%'}"></div>
+                        </div>
+                        <p><span th:text="${campaign.goal}">1000</span>人まで残り<span th:text="${campaign.goal - signatureCount}">1</span>人の賛同者が必要です！</p>
+                        <form class="ui form" method="post" action="/campaign/1"
+                              th:action="@{~/campaign/{id}(id=${campaign.campaignId})}">
+                            <div class="field" th:classappend="${signature.hasErrors('name')}?'error'">
+                                <input type="text" name="name" placeholder="氏名"/>
+                            </div>
+                            <div class="field" th:classappend="${signature.hasErrors('signatureComment')}?'error'">
+                                <label>コメント(任意)</label>
+                                <textarea name="signatureComment" placeholder="[サイトURL],[アクセス制限を解除すべき理由]"></textarea>
+                            </div>
+                            <button class="ui fluid red button">賛同する</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
